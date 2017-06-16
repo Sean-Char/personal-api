@@ -29,7 +29,20 @@ app.get('/family/:gender', mainCtrl.getFamilyGender);
 // get restaurants
 app.get('/restaurants', mainCtrl.getRestaurants);
 
+app.put('/name', mainCtrl.updateName)
+app.put('/location', mainCtrl.updateLocation)
+app.post('/hobbies', mainCtrl.addHobbies)
+app.post('/occupations', mainCtrl.addOccupations)
+app.post('/family', mainCtrl.addFamily)
+app.post('/restaurants', mainCtrl.addRestaurants)
 
+
+app.get('/skillz', mainCtrl.getSkillz)
+
+
+app.post('/skillz', middleware.generateId, mainCtrl.postSkillz);
+
+app.get('/secrets/:username/:pin', middleware.verifyUser, mainCtrl.getSecrets);
 
 app.listen(3000, function(){
     console.log('I be listening on port 3000')

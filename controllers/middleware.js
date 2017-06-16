@@ -1,3 +1,4 @@
+var skillz = require("../skillz.js")
 module.exports = {
 
   addHeaders: function(req, res, next) {
@@ -10,8 +11,17 @@ module.exports = {
       'X-Frame-Options': 'SAMEORIGIN',
       'Content-Security-Policy': "default-src 'self' devmountain.github.io"
     });
-    // Without next() or a res.send() our request 
+    // Without next() or a res.send() our request
     // will simply sit on our server and eventually time out.
     next();
+  },
+  generateId: function(req, res, next) {
+    req.body.id = skillz.length + 1
+    next()
+  },
+  verifyUser: function(req, res, next) {
+    if(req.params.username === "Sean" && req.params.pin === "555") {
+      next()
+    }
   }
 }
